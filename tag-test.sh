@@ -10,8 +10,12 @@ fi
 BRANCH=master
 echo "testgit........................................."
 
-cd ~/tmp/test-git/testgit
+### backup previous version
+OLD_COMMIT=$(git branch -v | grep "* $BRANCH" | awk '{print $3}')
+touch testgit.ver
+echo "$OLD_COMMIT" > testgit.ver
 
+cd ~/tmp/test-git/testgit
 git checkout $BRANCH
 git pull origin $BRANCH
 COMMIT=$(git branch -v | grep "* $BRANCH" | awk '{print $3}')
